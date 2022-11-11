@@ -21,4 +21,5 @@ from footballers.views import FootballerAPIView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/footballerslist', FootballerAPIView.as_view()),
+    path('api/v1/footballerslist/<int:pk>', FootballerAPIView.as_view()),
 ]
