@@ -9,16 +9,20 @@ from .serializers import FootballerSerializer
 
 class FootballerAPIView(APIView):
     def get(self, request):
-        lst = Footballer.objects.all().values()
-        return Response({'articles': list(lst)})
+        articles_queryset = Footballer.objects.all()
+        return Response({'articles': FootballerSerializer(articles_queryset, many=True).data})
 
     def post(self, request):
+
+        serializer = FootballerSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
         new_article = Footballer.objects.create(
             title=request.data['title'],
             content=request.data['content'],
             cat_id=request.data['cat_id']
         )
-        return Response({'new_article': model_to_dict(new_article)})
+        return Response({'new_article': FootballerSerializer(new_article).data})
 
 
 
