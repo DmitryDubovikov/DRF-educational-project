@@ -12,3 +12,12 @@ class FootballerAPIList(generics.ListCreateAPIView):
     queryset = Footballer.objects.all()
     serializer_class = FootballerSerializer
 
+
+class FootballerAPIUpdate(generics.UpdateAPIView):
+    queryset = Footballer.objects.all()
+    serializer_class = FootballerSerializer
+
+
+class FootballerAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Footballer.objects.all()
+    serializer_class = FootballerSerializer
