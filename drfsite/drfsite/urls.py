@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from footballers.views import FootballerAPIView
+from footballers.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/footballerslist', FootballerAPIView.as_view()),
-    path('api/v1/footballerslist/<int:pk>', FootballerAPIView.as_view()),
+    path('api/v1/footballerslist', FootballerAPIList.as_view()),
+    path('api/v1/footballerslist/<int:pk>', FootballerAPIList.as_view()),
 ]
