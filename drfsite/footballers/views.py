@@ -15,7 +15,7 @@ from .serializers import FootballerSerializer
 class FootballerAPIList(generics.ListCreateAPIView):
     queryset = Footballer.objects.all()
     serializer_class = FootballerSerializer
-    # permission_classes = (IsAuthenticatedOrReadOnly, )
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
 
 class FootballerAPIUpdate(generics.RetrieveUpdateAPIView):
