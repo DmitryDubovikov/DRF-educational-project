@@ -15,33 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
 
 from footballers.views import *
 
 
-class MyCustomRouter(routers.SimpleRouter):
-    routes = [
-        routers.Route(url=r'^{prefix}$',
-                      mapping={'get': 'list'},
-                      name='{basename}-list',
-                      detail=False,
-                      initkwargs={'suffix': 'List'}),
-        routers.Route(url=r'^{prefix}/{lookup}$',
-                      mapping={'get': 'retrieve'},
-                      name='{basename}-detail',
-                      detail=True,
-                      initkwargs={'suffix': 'Detail'})
-    ]
-
-
-router = MyCustomRouter()
-router.register(r'footballer', FootballerViewSet, basename='footballer')
-print(*router.urls, sep='\n')
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls))  # http://127.0.0.1:8000/api/v1/footballer
-    # path('api/v1/footballerslist', FootballerViewSet.as_view({'get': 'list'})),
-    # path('api/v1/footballerslist/<int:pk>', FootballerViewSet.as_view({'put': 'update'})),
+    path('api/v1/footballers', FootballerAPIList.as_view()),
+    path('api/v1/footballers/<int:pk>', FootballerAPIUpdate.as_view()),
+    path('api/v1/footballersdelete/<int:pk>', FootballerAPIDestroy.as_view()),
 ]
